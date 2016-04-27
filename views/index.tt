@@ -1,0 +1,16 @@
+<!--<a>Welcome To mobolo<span>Dancer2 Migration</span></a> 
+<ul>
+                <li><a href="/login" class="current">login</a></li>
+                <li><a href="/register" > register</a></li>
+                <li><a href="https://github.com/DragosTrif">github</a></li>
+                <!--<li><a href="#">About</a></li>-->
+                <!--<li><a href="/contact">Contact</a></li>
+</ul> -->
+
+
+<!--<% FOREACH result IN results %>
+                            <h3><a href="/single_post/<% result.id %>"> title: <% result.title %></a></li></h3>
+<%END%>-->    
+
+
+

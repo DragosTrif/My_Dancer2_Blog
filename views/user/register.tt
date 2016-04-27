@@ -1,0 +1,15 @@
+<h1>Register a new user !!!!</h1>
+
+<form action="<% login_url %>"  method=post>
+    <dl>
+      <dt>fullname
+      <dd><input type=text name=fullname>
+      <dt>username
+      <dd><input  type=text name=username >
+      <dt>password
+      <dd><input type=text name=password >
+      <dd><input type=submit value=Register>
+    </dl>
+  </form>
+
+ 

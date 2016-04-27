@@ -1,0 +1,11 @@
+<h1>Create post!!!!</h1>
+
+<form action="<% login_url %>"  method=post>
+    <dl>
+      <dt>title:
+      <dd><input type=text name=title>
+      <dt>content:
+      <dd><input rows="10" cols="80" type=password name=content>
+      <dd><input type=submit value=Post>
+    </dl>
+  </form>

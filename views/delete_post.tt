@@ -1,0 +1,12 @@
+<!--<% FOREACH result IN results %>-->
+<p>Do you really want to delete the post <% result.id %></p>
+
+	<form action="<% post_delete %>" name="delete_post" method="post" value="<% result.id %>">
+
+	<input type="radio" name="delete_post" value="yes" checked> yes<br>
+  	<input type="radio" name="delete_post" value="no" > no<br>
+	<input type=submit value=Delete>
+    
+  </form> 
+      
+<!--<% END %> 

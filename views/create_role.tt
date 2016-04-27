@@ -1,0 +1,12 @@
+<h1>Create role!!!!</h1>
+
+
+
+  <form action="<% create_role %>"  method=post>
+    <dl>
+      <dt>role
+      <dd><input type=text name=role>
+      <dt>
+      <dd><input type=submit value=Register>
+    </dl>
+  </form>  

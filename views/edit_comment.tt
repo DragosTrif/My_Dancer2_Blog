@@ -1,0 +1,10 @@
+<% FOREACH comment IN edited_comments  %>
+	<form action="<% edit_comment %>" name="edit_comment" method=post>
+    	<dl>
+      
+      		<dt>content:
+      		<dd><textarea  type=text rows="10" cols="80" name="content"> <%comment.content%></textarea>
+      	<dd><input type=submit value=edit>
+    </dl>
+
+<% END %> 

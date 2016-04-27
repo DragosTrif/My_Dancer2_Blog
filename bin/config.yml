@@ -1,0 +1,19 @@
+appname: migration               
+                
+     session: simple
+logger: console
+log: core
+ 
+#plugins:
+    #Auth::Extensible:
+      #disable_roles: 0
+       #user_home_page: '/login'
+        #realms:
+            #config:
+                #provider: Database
+                #users:
+                    #- user: 'foo'
+                     # pass: 'foo'
+                      #name: 'George Foo'
+                      #roles:
+                        #- Marketing                     

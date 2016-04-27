@@ -1,0 +1,11 @@
+<h1>Create comment!!!!</h1>
+
+	<form action="<% create_comment %>" name="create_comment" method=post>
+    	<dl>
+      		
+      		<dd><textarea  type=text rows="10" cols="35" name="content"></textarea>
+      		
+      	<dd><input type=submit value=comment>
+    </dl>
+ 	
+

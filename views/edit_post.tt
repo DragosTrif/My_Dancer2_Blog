@@ -1,0 +1,11 @@
+
+<% FOREACH result IN results %>
+	<form action="<% post_edit %>" name="post_edit" method=post>
+    	<dl>
+      		<dt>title:
+      		<dd><input type=text name="title" value="<%result.title%>">
+      		<dt>content:
+      		<dd><textarea  type=text rows="10" cols="80" name="content"> <%result.content%></textarea>
+      	<dd><input type=submit value=edit>
+    </dl>
+<% END %>   	

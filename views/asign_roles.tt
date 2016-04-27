@@ -1,0 +1,9 @@
+
+<form action="<% asign_role %>" name="asign_role" method="post" >
+
+	<input type="radio" name="asign_role" value="admin" checked> admin<br>
+  	<input type="radio" name="asign_role" value="user" > user<br>
+	<input type=submit value=asign_role>
+    
+  </form> 
+ 
