@@ -1,9 +1,10 @@
 
 <% FOREACH result IN results %>
-		 <h4>title: <% result.title %></h4>
+		 <h4></h4>
 		   <p> content: <% result.content %></p>
       	   <p>author: <% result.author.username %></p>
       	   <p>date: <% result.date_published %></p>
+           
       	
       	<p>Comments</p>
    		<% FOREACH comment IN comments  %>
@@ -14,9 +15,17 @@
    				<p><a href="/delete_comment/<%comment.id %>">delete_comment</a></p>
    			<% END %> 
    			
-       <% END %> 
+      <% END %> 
 
-<% END %>      
- <h3><a href="/">home</a></h3>     	
-    </dl>
+<% END %>
+
+<% IF !session %>
+
+  <h3><a href="/">home</a></h3>
+<% ELSE %>
+  <h3><a href="/admin">home</a></h3>
+<% END %>
+
+
+ 
   
