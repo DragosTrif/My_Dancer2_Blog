@@ -21,13 +21,28 @@ template_toolkit: TT
 #template: "simple"
 
 template: "template_toolkit"
+session: Cookie
 engines:
+  session:
+    Cookie:
+      secret_key: your secret passphrase
+      default_duration: 600
+    Simple:
+       cookie_name: testapp.session 
   template:
     template_toolkit:
       encoding: 'utf8'
       INCLUDE_PATH: 'views'  
       start_tag: '<%'
       end_tag:   '%>'
+
+
+#engines:
+  #session:
+    #Cookie:
+      
+       
+              
 
 # session engine
 
@@ -43,8 +58,11 @@ engines:
 # is different for each app.
 #
 #engines:
-  session:
-    Simple:
+#session: Cookie
+    #Cookie:
+     #secret_key: your secret passphrase
+      #default_duration: 600
+    #Simple:
 #      cookie_name: testapp.session
 #
 #engines:
