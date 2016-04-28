@@ -29,10 +29,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Speaker Blog - free css template</title>
+<title>Dragos blog </title>
 <meta name="keywords" content="free css templates, speaker blog template, CSS, HTML" />
 <meta name="description" content="Speaker Blog is a free website template provided by templatemo.com" />
-<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="/templatemo_style.css" rel="stylesheet" type="text/css" />
 </head>
 
 
@@ -43,7 +43,7 @@
         <div id="templatemo_header">
             
             <div id="site_title"> 
-                <a href="http://www.templatemo.com" target="_blank">Speaker Blog<span>Free Website Template</span></a>            
+                <a href="http://www.templatemo.com" target="_blank">Dragos Blog<span>A small Dancer2 web app</span></a>            
             </div> 
           <!-- end of site_title -->
         
@@ -52,7 +52,13 @@
         <div id="templatemo_menu">
     
             <ul>
-                <li><a href="/login" class="current">login</a></li>
+            <% IF session  %>
+                <li><a href="/logout" class="current">logout</a></li>
+
+            <% ELSE %>
+            	<li><a href="/login" class="current">login</a></li>
+            <% END %>
+                
                 <li><a href="/register" > register</a></li>
                 <li><a href="https://github.com/DragosTrif">github</a></li>
                 
@@ -67,25 +73,25 @@
             
                 <div class="sidebar_box">
                     
-                    <h2>Topics</h2>
+                    <h2>Post Index</h2>
                     <ul class="side_menu">
-                    	<% content %>
-                        <!--<% FOREACH result IN results %>
-                            <li><h4>title: <% result.title %></h4></li>
-                         <%END%>-->       
+                    	
+                        <% FOREACH result IN results %>
+                            <li><h4><a href="/single_post/<% result.id %>"> title: <% result.title %></a></h4></li>
+                         <%END%>       
                     </ul>
                 
                 </div>
                 
                 <div class="sidebar_box">
             
-                    <h2>Comments</h2>
+                    <h2>Famous quotes</h2>
                     
                     <div class="sidebar_box_content">
                             
                         <div class="news_box">
-                            <h3><a href="#">Lorem ipsum dolor sit amet consectetur </a></h3>
-                            <p>Maecenas tellus erat, dictum vel semper a, dapibus ac elit. Nunc rutrum pretium porta.</p>
+                            <h3><a href="#">Making a Blog is the 'Hello World ' of web programming</a></h3>
+                            
                         </div>
                         
                         <!-- <div class="news_box">
@@ -101,7 +107,7 @@
                         <div class="news_box">
                             <h3><a href="#">Suspendisse ac magna quis est eleifend</a></h3>
                             <p>In velit urna, convallis id, pharetra in, iaculis sit amet, mi. Praesent consectetur imperdiet mauris.</p>
-                        </div>
+                        </div>-->
                         
                      </div>
                 
@@ -109,42 +115,31 @@
             
             </div> <!-- end of sidebar -->
             
-            <!--<div id="templatemo_content">
+            <div id="templatemo_content">
             
             	<div class="post_section"><span class="top"></span><span class="bottom"></span>
         
                      <div class="post_content">
+                     <% FOREACH result IN results %>
+                     	<h2><%result.title%></a></h2>
+                        <% END %> 
                      
-                     	<h2><a href="#">Aliquam lorem ante dapibus</a></h2>
+                        <p><% content %></p>
                         
-                      May 28th, 2048 in <a href="http://www.templatemo.com" target="_parent">Web Design</a> by <a href="http://www.templatemo.com" target="_parent">Designer</a><img src="images/templatemo_image_01.jpg" alt="image 1" />
-                       <p><a href="http://www.templatemo.com" target="_parent">templatemo.com</a> provides a lot of high quality <a href="http://www.templatemo.com/page/1" target="_parent">free css templates</a> for your personal or commercial websites. All <a href="http://www.templatemo.com" target="_parent">website templates</a> are absolutely free to download, modify and apply for your websites without any restriction.</p>
-                            
-                  <a href="#" class="more">Continue reading...</a> | <a href="#" class="comment">Comments (124)</a></div>
+                  </div>
         
                 </div><div class="post_section_bottom"></div>
                         
-                <div class="post_section"><span class="top"></span><span class="bottom"></span>
-                
-                    <div class="post_content">
-                    
-                    	<h2><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                    
-                        May 24th, 2048 in <a href="http://www.templatemo.com" target="_parent">Web Template</a> by <a href="http://www.templatemo.com" target="_parent">Designer</a><img src="images/templatemo_image_02.jpg" alt="image 2" />
-                        
-                        <p>Ut nec vestibulum odio. Vivamus vitae nibh eu sem malesuada rutrum et sit amet magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent aliquam velit a magna sodales quis elementum ipsum auctor. Ut at metus leo, et dictum sem.</p>
-                      <a href="#">Continue reading...</a> | <a href="#">Comments (248)</a>
-        
-                    </div>
+               
                 
                 </div>
             
             </div> <!-- end of tempaltemo_content -->
         
-        	<!--<div class="cleaner"></div>
+        	<div class="cleaner"></div>
         </div> <!-- end of content_wrapper -->
     
-    <!--</div> <!-- end of templatemo_wrapper_inner -->
+    </div> <!-- end of templatemo_wrapper_inner -->
     
 </div> <!-- templatemo_wrapper_outer -->
 
@@ -158,13 +153,13 @@
         </div>
         
         <div class="section_w180px">
-			       
+			<p>links</p>       
         	<ul class="footer_menu_list">
-            	<li><a href="#">Aenean vulputate</a></li>
-                <li><a href="#">Etiam ultricies</a></li>
-                <li><a href="#">Nullam quis</a></li>
-                <li><a href="#">Sed consequat</a></li>
-                <li><a href="#">Cras dapibus</a></li>                
+            	<li><a href="http://stackoverflow.com/users/459233/tudor-constantin">my mentor</a></li>
+                <li><a href="http://perlmaven.com/">perlmaven</a></li>
+                <li><a href="http://www.cluj.pm/">clujpm </a></a></li>
+                
+                <li><a href="https://www.facebook.com/groups/238089546271513/?ref=bookmarks">Cluj perl Comunity</a></li>                
             </ul>
         </div>
        
@@ -176,7 +171,7 @@
         </div>
         <div class="margin_bottom_20"></div>
     	<div class="margin_bottom_20"></div>
-        Copyright © 2048 <a href="#">Your Company Name</a> | 
+        Copyright © 2048 Created by Trif Dragos | 
         <a href="http://www.iwebsitetemplate.com" target="_parent">Website Templates</a> by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a>
     </div> <!-- end of footer -->
 </div> <!-- end of footer wrapper -->
