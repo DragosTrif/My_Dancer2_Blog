@@ -1,26 +1,25 @@
 package migration;
 use Dancer2;
 use Dancer2::Plugin::DBIC qw(schema resultset rset);
-#use lib::My::Schema;
-use Dancer2::Plugin::Passphrase;
-use DBIx::Class::Schema::Loader qw/ make_schema_at /;
-#use Dancer2::Plugin::Auth::Tiny;
-use DateTime;
-use Data::Dumper;
 
-#test
-#use Dancer2::Session::Memcached;
+
+use DBIx::Class::Schema::Loader qw/ make_schema_at /;
+
+use DateTime;
+
+
+
 use Dancer2::Plugin::Auth::Extensible;
-#use Dancer2::Plugin::Auth::Extensible::Provider::Database;
+
 use Dancer2::Plugin::Database;
 use Dancer2::Plugin::Auth::Extensible::Provider::DBIC;
 use Crypt::Digest;
-use Term::ReadPassword::Win32;
-use Getopt::Long;
+
+
 use Crypt::PBKDF2;
 
 
-    #DBIx::Class::Schema::Loader->naming('v7');
+    
 
 our $VERSION = '0.1';
 set 'session'  => 'Simple';
@@ -82,15 +81,7 @@ sub show_comments{
 	return @comment_result;
 }
 
-#sub hashing {
-	#my $self = shift;
-	
-	#my $pbkdf2 = Crypt::PBKDF2->new(
-		#hash_class => 'HMACSHA2',
-	#);
 
-	#return $pbkdf2;
-#}
 
 sub crypt_password{
 	my $password = shift;
@@ -123,29 +114,15 @@ post '/register' => sub {
 	my $password = params->{password};
 	warn "The pass is |$password|\n";
 
-	#my $password_as_arg = 
-	#GetOptions(
-				#'password=s' => \$password,
-	#) or die "Could not parse options";
-	#my  $cmd = "generate-crypted-password";
-	#my $program = system( $cmd );
-	#my $saved_pass;
-
-	#if(@ARGV){
-		#my $args = @ARGV;
-		my $saved_pass = &crypt_password($password);  #system("sh"," $cmd","--pasword" ); 
-		warn "crypted pass is |$saved_pass|\n";
-	#}
 	
-
-	#my $saved_pass = passphrase($password)->generate;
-
+		my $saved_pass = &crypt_password($password);   
+	
 
 
 	$schema->resultset('User')->create({
 		username => $username, 
 		fullname => $fullname,
-		password => $saved_pass,#$password, #$saved_pass->rfc2307,
+		password => $saved_pass,
 
 	});	
 
@@ -153,66 +130,48 @@ post '/register' => sub {
 
 };
 
-#get '/login' => sub{
-	#template 'loginform' => {};
 
-#};
 
 post '/login' => sub {
     my $username  = params->{username};
     my $password  = params->{password}; 
-    my $pass_to_check = &crypt_password($password);
-    warn $pass_to_check;
+    
+    
 
      my $user = $schema->resultset('User')->search({ username => $username })->first;       
 
      	
-    	#if($user && passphrase($password)->matches($user->password) && $username eq $user->username)
-     	#{
-     		#my $redir_url = param('redirect_url') || '/admin';
-     	
-    		#
-    		#warn "The is is:\n";
-    		#warn session('user')->id;
-    		#redirect $redir_url;
-    	#}
-    	#else
-    	#{
-    		#"wrong user name or password "
-    	#}
+    	
 
     	my ($success, $realm) = authenticate_user(
             $username, $password
         );
 
-        #warn "This shuld be 1 |$success|\n";
+        
         if ($success) {
             session logged_in_user => $success;
             session logged_in_user_realm => $realm;
             session user => $user;
 
-             #other code here
-            # redirect '/admin';
+            
             
         } else {
              authentication failed
         } 		
     
-   	   #my $user = logged_in_user;
-	 #return "Hi there, $user->{username}";
+   	 
 
 };
 
 get '/admin' => require_login  sub{
 	my @results = ();
 	@results = &show_posts;
-	warn "The results are :|@results|\n";
+	
 	my @comments = ();
 	@comments = &show_comments;
 	my @comments_per_posts = ();
 	my $username = logged_in_user->{id};
-	warn "The role is :\n";
-    warn  user_has_role $username;
+	
 	 
 	template 'admin', {
 		results => \@results,
@@ -230,7 +189,7 @@ post 'logout' =>  sub{
 	if($logout eq 'yes')
 	{
 		app->destroy_session;
-   		#set_flash('You are logged out.');
+   		
    		redirect '/';
 	}
 	else
@@ -238,49 +197,7 @@ post 'logout' =>  sub{
 		redirect '/admin';
 	}
 };
-#declarinag a session
-#set 'session'  => 'Simple';
-#storing a user name and a pass inside it
-#set 'username' => 'admin';
-#set 'password' => 'foo';
 
-#pasing the forms params via the post request
-#get '/loginform' => needs login => sub{
-	#my $err;
-	
-	 
-	#if(request->method() eq "POST" ){
-		#if(params->{'username'} ne setting('username'))
-		#{
-		 	#$err = "Invalid username";
-		 	#my $username = params->{'username'};
-		 	#my $password = params->{'password'};
-		 	#warn "the name is |$name|\n";
-		#}
-		#elsif(params->{'password'} ne setting('password')){
-			#$err = "Invalid password";
-
-		#}
-		#else{
-		 	#session 'logged_in' => true;
-		 	 #template 'admin';
-		 	 #return 'Only authenticated users should be able to see this page';
-		#}
-	#}
-	#if(authenticate_user $username, $password)
-	#{
-		#return $content;
-	#}
-
-	#
-	#template 'admin' => {};
-	
-	
-#};
-
-#post '/loginform' => sub{
-	#t#emplate 'admin';
-#};	
 
 get '/contact' => sub{
 	template 'contact';
@@ -309,12 +226,16 @@ get '/asign_role' => sub{
 
 post '/asign_role' => sub{
 	my $role =  params->{'asign_role'};
-	warn "The role param is |$role|\n";
+	my $user = params->{'username'};
+	
+	
 	my $role_id = $schema->resultset('Role')->search({ role => $role })->first->id;
-	warn "the role id is |$role_id|\n";
+	my $username = $schema->resultset('User')->search({ username => $user})->first;
+	
+	
 
 	$schema->resultset('UserRole')->create({
-			user_id => logged_in_user->{id},
+			user_id => $username->id,
 			role_id => $role_id,
 
 		});
@@ -360,7 +281,7 @@ get '/post_delete/:id' => require_role admin => sub{
 
 
 	
-	warn "The results are :|@results|\n";
+	
 	template 'delete_post', {
 		results => \@post_to_delete,
 	};
@@ -372,10 +293,9 @@ get '/post_delete/:id' => require_role admin => sub{
 
 post '/post_delete/:id' => require_role admin => sub{
 	my $id =  param 'id';
+
 	my $delete = params->{'delete_post'};
-	#my $cancel_delete = params->{'no'};
 	
-	#warn "The id is : |$id\n|";
 	if($delete eq 'yes' )
 	{
 		$schema->resultset('Post')->find({id => $id })->delete;
@@ -392,9 +312,17 @@ get '/single_post/:id' =>  sub{
 	@results = &show_posts;
 	my @single_post = ();
 	push @single_post, grep{$_->{id} == $id} @results;
+
+	my @comments = ();
+	@comments =  &show_comments;
+	my @show_comments = ();
+
+	push @show_comments, grep{ $_  } @comments;
+	
 	
 	template 'single_post', {
 		results => \@single_post,
+		comments => \@show_comments,
 	};
 };
 
@@ -418,12 +346,13 @@ get '/post_edit/:id' => require_role admin => sub{
 };
 post '/post_edit/:id' => require_role admin => sub{
 	my $id = param 'id';
-	#warn "the post_id is:|$id |\n";
+	my $route = "/single_post/$id";
+	
 	my $title = params->{"title"};
-	#warn "the title is is:|$title |\n";
+	
 	
 	my $content = params->{"content"};
-	#warn "the title is is:|$content |\n";
+	
 	my $edit = $schema->resultset('Post')->find({id => $id });
 	
 	$edit->update({
@@ -431,7 +360,12 @@ post '/post_edit/:id' => require_role admin => sub{
 		content => $content,
 	});
 
-	redirect '/admin';	
+
+	 
+	
+	redirect $route;
+
+		
 
 };
 
@@ -445,6 +379,7 @@ get '/create_comment/:id' => require_login sub{
 };
 post '/create_comment/:id'=> require_login sub{
 	my $id = param 'id';
+	my $route = "/single_post/$id";
 	
 	my $content = params->{'content'};
 	$schema->resultset('Comment')->create({
@@ -455,10 +390,8 @@ post '/create_comment/:id'=> require_login sub{
 		
 	});
 
-	# session('user')->id,
-		#user_id => session('user')->id,
-
-	redirect '/admin';
+	
+	redirect $route;
 
 };
 
@@ -479,14 +412,22 @@ get '/delete_comment/:id' => require_login sub{
 post '/delete_comment/:id' => require_login sub{
 	my $id =  param 'id';
 	my $delete = params->{'delete_comment'};
+	my $post_id = params->{'delete'};
+	
+	my $route = "/single_post/$post_id";
+
+
+	
+	
 
 	if($delete eq 'yes' )
 	{
 		$schema->resultset('Comment')->find({id => $id })->delete;
-		redirect '/admin';
+		
+		redirect $route;
 	}
 	
-	redirect '/admin';
+	redirect $route;
 };
 
 get '/edit_comment/:id' => require_login sub{
@@ -506,12 +447,14 @@ post '/edit_comment/:id' => require_login sub{
 	my $id = param 'id';
 
 	my $content = params->{"content"};
+	my $post_id = params->{"post_id"};
+	my $route = "/single_post/$post_id";
 	my $edit_comment = $schema->resultset('Comment')->find({id => $id });
 
 	$edit_comment->update({
 			content => $content,
 		});
-	redirect '/admin';
+	redirect $route;
 
 };
 
