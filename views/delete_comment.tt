@@ -1,9 +1,13 @@
-<p>Do you really want to delete the comment <% deleted_comments.id %></p>
+
+<% FOREACH comment IN deleted_comments %>
+	<p>Do you really want to delete the comment <% commnet.id %></p>
 
 	<form action="<% delete_comment %>" name="delete_comment" method="post" value="<% deleted_comments.id %>">
 
 	<input type="radio" name="delete_comment" value="yes" checked> yes<br>
   	<input type="radio" name="delete_comment" value="no" > no<br>
+  	<input type="hidden" name="delete" value="<% comment.post_id %>"><br>
 	<input type=submit value=Delete>
     
   </form> 
+<% END %>  

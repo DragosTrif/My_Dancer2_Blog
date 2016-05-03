@@ -3,7 +3,8 @@
     	<dl>
       
       		<dt>content:
-      		<dd><textarea  type=text rows="10" cols="80" name="content"> <%comment.content%></textarea>
+      		<dd><textarea  type=text rows="10" cols="50" name="content"> <%comment.content%></textarea>
+      		<dd><input type="hidden" name="post_id" value="<% comment.post_id %>"><br>
       	<dd><input type=submit value=edit>
     </dl>
 

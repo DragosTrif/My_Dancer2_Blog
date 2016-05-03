@@ -1,25 +1,43 @@
-<h1>Welcome to a very cool admin dashborad!!!!<h2>
-
-<h2><a href="/create_post">create_post</a></h2>
-
-<h3><a href="logout">logout</a></h3>
-<p><a href="create_role">create_role</a></p>
-<p><a href="asign_role">asign_role</a></p>
-
-
-
-
-
 <% FOREACH result IN results %>
-      <li> <h4>title: <% result.title %></h4>
+    <h2><%result.title%></a></h2>
+    <p> content: <% result.content %></p>
+    <% LAST %>
+      <p>Comments</p>
+
+      <% FOREACH comment IN comments  %>
+      
+         <% IF result.id == comment.post_id %>
+            <p><%comment.content%></p>
+            <p><a href="/edit_comment/<%comment.id %>">edit_comment</a</p>
+            <p><a href="/delete_comment/<%comment.id %>">delete_comment</a></p>
+         <% END %> 
+            
+     <% END %>   
+
+  <% END %> 
+
+
+
+
+
+
+
+<!--<% FOREACH result IN results %>
+      <li> 
+         <% IF result.id  %>
+            <h2><%result.title%></a></h2>
       	   <p> content: <% result.content %></p>
       	   <p>author: <% result.author.username %></p>
       	   <p>date: <% result.date_published %></p>
-      	   <p><a href="/post_delete/<% result.id %>">delete_post</a></p>
+            <% LAST %>
+      	   <!--<p><a href="/post_delete/<% result.id %>">delete_post</a></p>
       	   <p><a href="/post_edit/<%result.id %>">edit_post</a></p>
-   		   <p><a href="/create_comment/<% result.id %>">comment</a></p>
+   		   <p><a href="/create_comment/<% result.id %>">comment</a></p>-->
+         <!--<% END %>    
    	</li>
-   	<p>Comments</p>
+     
+   	<!--<p>Comments</p>
+
    	<% FOREACH comment IN comments  %>
    	
    		<% IF result.id == comment.post_id %>
@@ -30,6 +48,6 @@
    			
      <% END %>   
 
-<% END %>      
+<% END %>  -->    
  
  	

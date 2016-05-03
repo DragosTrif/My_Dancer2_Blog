@@ -43,7 +43,7 @@
         <div id="templatemo_header">
             
             <div id="site_title"> 
-                <a href="http://www.templatemo.com" target="_blank">Dragos Blog<span>A small Dancer2 web app</span></a>            
+                <a href="http://perldancer.org/" >Dragos Blog<span>A small Dancer2 web app</span></a>            
             </div> 
           <!-- end of site_title -->
         
@@ -54,15 +54,21 @@
             <ul>
             <% IF session  %>
                 <li><a href="/logout" class="current">logout</a></li>
+                <li><a href="/create_post">new post</a></li>
+                <li><a href="create_role">new role</a></li>
+                <li><a href="asign_role">asign role</a></li>
 
             <% ELSE %>
             	<li><a href="/login" class="current">login</a></li>
+            	<li><a href="/register" > register</a></li>
+            	<li><a href="/contact">Contact</a></li>
+            	 <li><a href="https://github.com/DragosTrif">github</a></li>
             <% END %>
                 
-                <li><a href="/register" > register</a></li>
-                <li><a href="https://github.com/DragosTrif">github</a></li>
                 
-                <li><a href="/contact">Contact</a></li>
+               
+                
+                
             </ul>  
         
         </div> <!-- end of templatemo_menu -->
@@ -120,9 +126,21 @@
             	<div class="post_section"><span class="top"></span><span class="bottom"></span>
         
                      <div class="post_content">
-                     <% FOREACH result IN results %>
-                     	<h2><%result.title%></a></h2>
-                        <% END %> 
+                    	<!--<% FOREACH result IN results %>
+    					  <li> 
+         					<!--<% IF result.id %>-->
+            					<!--<h2><%result.title%></a></h2>
+           						<p> content: <% result.content %></p>
+           						<p>author: <% result.author.username %></p>
+           						<p>date: <% result.date_published %></p>
+           					 <% NEXT %>
+           <!--<p><a href="/post_delete/<% result.id %>">delete_post</a></p>
+           <p><a href="/post_edit/<%result.id %>">edit_post</a></p>
+         <p><a href="/create_comment/<% result.id %>">comment</a></p>-->
+         			<!--<% END %>_-->    
+     				  <!--</li>--> 
+					<!--<% END %> -->    
+
                      
                         <p><% content %></p>
                         
@@ -153,12 +171,11 @@
         </div>
         
         <div class="section_w180px">
-			<p>links</p>       
+			<h3> Useful links:<h3>       
         	<ul class="footer_menu_list">
             	<li><a href="http://stackoverflow.com/users/459233/tudor-constantin">my mentor</a></li>
                 <li><a href="http://perlmaven.com/">perlmaven</a></li>
                 <li><a href="http://www.cluj.pm/">clujpm </a></a></li>
-                
                 <li><a href="https://www.facebook.com/groups/238089546271513/?ref=bookmarks">Cluj perl Comunity</a></li>                
             </ul>
         </div>

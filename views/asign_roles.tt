@@ -3,6 +3,8 @@
 
 	<input type="radio" name="asign_role" value="admin" checked> admin<br>
   	<input type="radio" name="asign_role" value="user" > user<br>
+  	<p>Asign to:</p>
+  	<input type="text"	name="username"><br>
 	<input type=submit value=asign_role>
     
   </form> 
