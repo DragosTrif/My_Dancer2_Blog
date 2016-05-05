@@ -36,14 +36,18 @@
 </head>
 
 
-<div id="templatemo_wrapper_outer">
+<div id="templatemo_wrapper_outer" >
 
-	<div id="templatemo_wrapper_inner">
+	<div id="templatemo_wrapper_inner" >
     
         <div id="templatemo_header">
             
             <div id="site_title"> 
-                <a href="http://perldancer.org/" >Dragos Blog<span>A small Dancer2 web app</span></a>            
+            <% IF session %>
+                <a href="/admin" >Dragos Blog<span>A small Dancer2 web app</span></a>
+            <% ELSE %>
+                <a href="/">Dragos Blog<span>A small Dancer2 web app</span></a>
+            <% END %>                    
             </div> 
           <!-- end of site_title -->
         
@@ -82,8 +86,8 @@
                     <h2>Post Index</h2>
                     <ul class="side_menu">
                     	
-                        <% FOREACH result IN results %>
-                            <li><h4><a href="/single_post/<% result.id %>"> title: <% result.title %></a></h4></li>
+                        <% FOREACH index IN post_index %>
+                            <li><h4><a href="/single_post/<% index.id %>"> title: <% index.title %></a></h4></li>
                          <%END%>       
                     </ul>
                 
@@ -91,12 +95,16 @@
                 
                 <div class="sidebar_box">
             
-                    <h2>Famous quotes</h2>
+                    <!--<h2>Famous quotes</h2>-->
                     
                     <div class="sidebar_box_content">
                             
                         <div class="news_box">
-                            <h3><a href="#">Making a Blog is the 'Hello World ' of web programming</a></h3>
+                        <% IF !session %>
+                            <h3><p>Login to comment</p></h3>
+                        <% ELSE %>
+                            <h3><p>Welcome </p></h3>
+                         <% END %>      
                             
                         </div>
                         
@@ -173,10 +181,11 @@
         <div class="section_w180px">
 			<h3> Useful links:<h3>       
         	<ul class="footer_menu_list">
-            	<li><a href="http://stackoverflow.com/users/459233/tudor-constantin">my mentor</a></li>
+            	<li><a href="http://programming.tudorconstantin.com/">my mentor</a></li>
                 <li><a href="http://perlmaven.com/">perlmaven</a></li>
                 <li><a href="http://www.cluj.pm/">clujpm </a></a></li>
-                <li><a href="https://www.facebook.com/groups/238089546271513/?ref=bookmarks">Cluj perl Comunity</a></li>                
+                <li><a href="https://www.facebook.com/groups/238089546271513/?ref=bookmarks">Cluj perl Comunity</a></li> 
+                <li><a href="http://perldancer.org/"> perl Dancer</li>               
             </ul>
         </div>
        

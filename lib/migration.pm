@@ -13,6 +13,7 @@ use Dancer2::Plugin::Auth::Extensible;
 
 use Dancer2::Plugin::Database;
 use Dancer2::Plugin::Auth::Extensible::Provider::DBIC;
+use Dancer2::Session::Cookie;
 use Crypt::Digest;
 
 
@@ -22,7 +23,7 @@ use Crypt::PBKDF2;
     
 
 our $VERSION = '0.1';
-set 'session'  => 'Simple';
+#set 'session'  => 'Simple';
 
 
 my $schema = My::Schema->connect('dbi:SQLite:moblo.db');
@@ -98,8 +99,12 @@ sub crypt_password{
 get '/' => sub {
 	my @results = ();
 	@results = &show_posts;
+	my @post_index = ();
+	@post_index = &show_posts;
 	
-    template 'index' ,{ results => \@results,};
+    template 'index' ,{ results => \@results,
+    					post_index => \@post_index,
+    			};
 };
 
 get '/register' => sub {
@@ -166,6 +171,9 @@ post '/login' => sub {
 get '/admin' => require_login  sub{
 	my @results = ();
 	@results = &show_posts;
+
+	my @post_index = ();
+	@post_index = &show_posts;
 	
 	my @comments = ();
 	@comments = &show_comments;
@@ -176,6 +184,7 @@ get '/admin' => require_login  sub{
 	template 'admin', {
 		results => \@results,
 		comments => \@comments,
+		post_index => \@post_index,
 	};
 };
 
@@ -311,6 +320,9 @@ get '/single_post/:id' =>  sub{
 	my @results = ();
 	@results = &show_posts;
 	my @single_post = ();
+
+	my @post_index = ();
+	@post_index = &show_posts;
 	push @single_post, grep{$_->{id} == $id} @results;
 
 	my @comments = ();
@@ -323,6 +335,7 @@ get '/single_post/:id' =>  sub{
 	template 'single_post', {
 		results => \@single_post,
 		comments => \@show_comments,
+		post_index => \@post_index,
 	};
 };
 
